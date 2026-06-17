@@ -1,0 +1,138 @@
+Technische Analyse
+Inleiding
+Voor de ontwikkeling van Quizify is onderzocht welke technologieën het meest geschikt zijn om een realtime multiplayer pubquiz applicatie te realiseren. Uit het functioneel ontwerp blijkt dat meerdere spelers gelijktijdig moeten kunnen deelnemen aan een quiz, antwoorden moeten kunnen insturen en realtime updates moeten ontvangen. Daarnaast moet een host de quiz kunnen beheren en moeten scores direct worden bijgewerkt voor alle deelnemers.
+Op basis van deze eisen is gekeken naar verschillende frontend-, backend- en realtime communicatietechnologieën.
+
+Functionele eisen vanuit technisch perspectief
+De applicatie moet de volgende technische functionaliteiten ondersteunen:
+•	Meerdere spelers kunnen gelijktijdig deelnemen aan een quiz.
+•	Een host kan een quizsessie starten en beheren.
+•	Spelers kunnen via een unieke code deelnemen.
+•	Antwoorden moeten realtime worden verwerkt.
+•	Leaderboards moeten direct worden bijgewerkt.
+•	De quizstatus moet gesynchroniseerd blijven tussen host en spelers.
+•	De applicatie moet zowel op desktop als mobiel goed functioneren.
+Deze eisen maken realtime communicatie een belangrijk onderdeel van de technische architectuur.
+
+Realtime Communicatie
+Gekozen oplossing: Socket.IO
+Voor de realtime communicatie is gekozen voor Socket.IO in combinatie met Node.js.
+Socket.IO maakt het mogelijk om een permanente verbinding tussen client en server open te houden. Hierdoor kunnen gebeurtenissen direct worden verzonden zonder dat gebruikers de pagina hoeven te verversen.
+Voorbeelden binnen Quizify:
+•	Een host start een quiz.
+•	Alle verbonden spelers ontvangen direct het nieuwe scherm.
+•	Een speler verstuurt een antwoord.
+•	De host ziet direct dat een extra antwoord is binnengekomen.
+•	Een leaderboard wordt bijgewerkt.
+•	Alle spelers ontvangen direct de nieuwe scores.
+Deze vorm van communicatie past goed bij multiplayer applicaties en wordt veel toegepast binnen realtime webapplicaties.
+Alternatieven
+Polling
+Bij polling vraagt de browser iedere paar seconden nieuwe informatie op bij de server.
+Nadelen:
+•	Onnodig veel netwerkverkeer.
+•	Minder realtime.
+•	Slechter schaalbaar.
+Firebase Realtime Database
+Firebase ondersteunt realtime synchronisatie.
+Nadelen:
+•	Minder controle over de backend.
+•	Extra afhankelijkheid van Google.
+•	Minder leerzaam vanuit software engineering perspectief.
+Om deze redenen is gekozen voor Socket.IO.
+
+Frontend
+Gekozen oplossing: Next.js + React + TypeScript
+Voor de frontend wordt gebruikgemaakt van Next.js in combinatie met React en TypeScript.
+React
+React maakt het mogelijk om de gebruikersinterface op te bouwen uit herbruikbare componenten.
+Voorbeelden:
+•	Question Card
+•	Leaderboard
+•	Lobby
+•	Quiz Setup
+•	Result Screen
+Dit maakt de applicatie onderhoudbaar en schaalbaar.
+Next.js
+Next.js biedt een moderne ontwikkelomgeving voor React-applicaties en ondersteunt routing, optimalisaties en deployment.
+Voordelen:
+•	Bekende technologie binnen het werkveld.
+•	Goede prestaties.
+•	Eenvoudige deployment via Vercel.
+•	Sluit aan bij eerdere projecten binnen de opleiding.
+TypeScript
+TypeScript voegt statische typecontrole toe aan JavaScript.
+Voordelen:
+•	Minder programmeerfouten.
+•	Betere onderhoudbaarheid.
+•	Duidelijkere datastructuren.
+
+Backend
+Gekozen oplossing: Node.js
+Voor de backend wordt gebruikgemaakt van Node.js.
+Node.js sluit goed aan op Socket.IO omdat beide gebruikmaken van JavaScript.
+Voordelen:
+•	Eén programmeertaal voor frontend en backend.
+•	Goede ondersteuning voor realtime applicaties.
+•	Grote community en documentatie.
+•	Veel gebruikt binnen moderne webapplicaties.
+De backend is verantwoordelijk voor:
+•	Het beheren van quizsessies.
+•	Het verwerken van antwoorden.
+•	Het berekenen van scores.
+•	Het synchroniseren van spelers.
+•	Het versturen van realtime updates.
+
+Database
+Gekozen oplossing: PostgreSQL
+Voor de opslag van quizgegevens wordt PostgreSQL gebruikt.
+Voorbeelden van gegevens:
+•	Quizsessies
+•	Spelers
+•	Teams
+•	Vragen
+•	Antwoorden
+•	Scores
+Voordelen:
+•	Betrouwbaar.
+•	Relationele structuur past goed bij quizdata.
+•	Veel gebruikt binnen professionele softwareontwikkeling.
+Alternatief: SQLite
+SQLite is eenvoudiger op te zetten maar minder geschikt voor meerdere gelijktijdige gebruikers.
+Omdat Quizify een multiplayer applicatie is, biedt PostgreSQL meer mogelijkheden voor toekomstige uitbreiding.
+
+Hosting en Deployment
+Frontend
+•	Vercel
+Backend
+•	Render of Railway
+Database
+•	PostgreSQL (Neon of Supabase)
+Deze combinatie is eenvoudig te deployen, gratis beschikbaar voor ontwikkeldoeleinden en wordt veel gebruikt binnen moderne webprojecten.
+
+Technische Architectuur
+De architectuur bestaat uit drie onderdelen:
+Frontend
+•	Next.js
+•	React
+•	TypeScript
+•	Tailwind CSS
+Backend
+•	Node.js
+•	Express
+•	Socket.IO
+Database
+•	PostgreSQL
+Communicatiestroom:
+1.	Host maakt een quiz aan.
+2.	Backend genereert een unieke gamecode.
+3.	Spelers verbinden via Socket.IO.
+4.	Host start de quiz.
+5.	Vragen worden realtime verstuurd.
+6.	Antwoorden worden opgeslagen en verwerkt.
+7.	Scores worden berekend.
+8.	Leaderboards worden realtime bijgewerkt.
+
+Conclusie
+Op basis van de functionele eisen en het realtime karakter van Quizify is gekozen voor een architectuur bestaande uit Next.js, React, TypeScript, Node.js, Socket.IO en PostgreSQL. Deze technologieën sluiten goed aan bij de eisen van een multiplayer quizapplicatie en maken het mogelijk om realtime communicatie, automatische scoreverwerking en een gebruiksvriendelijke ervaring voor zowel hosts als spelers te realiseren.
+
