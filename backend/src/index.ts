@@ -8,13 +8,17 @@ import {
   isRoundComplete, areAllAnswered, getAnsweredCount, deleteRoom,
 } from './gameManager';
 
+const allowedOrigins: string | string[] = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(',').map(o => o.trim())
+  : '*';
+
 const app = express();
-app.use(cors());
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
-  cors: { origin: '*', methods: ['GET', 'POST'] },
+  cors: { origin: allowedOrigins, methods: ['GET', 'POST'] },
 });
 
 app.get('/health', (_, res) => res.json({ ok: true }));
