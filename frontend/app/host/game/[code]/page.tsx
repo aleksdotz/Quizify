@@ -50,13 +50,13 @@ export default function HostGamePage({ params }: { params: Promise<{ code: strin
     });
 
     socket.on('quiz:question', (payload: QuestionPayload) => {
-      setCurrentQuestion(payload);
-      setView('question');
       setAnsweredPlayers([]);
       setAnsweredCount(0);
       setQuestionResult(null);
+      setCurrentQuestion(payload);
       setTimerKey(k => k + 1);
       setActiveTab(payload.question.type as 'multiple-choice' | 'open' | 'match');
+      setView('question');
     });
 
     socket.on('quiz:answer-received', ({ count, total, answeredPlayers: ap }) => {
@@ -228,10 +228,10 @@ export default function HostGamePage({ params }: { params: Promise<{ code: strin
             {q.question.options.map((opt, i) => (
               <div
                 key={i}
-                className={`answer-option p-4 flex items-center gap-3 ${opt === q.question.correct ? 'correct' : ''}`}
+                className="answer-option p-4 flex items-center gap-3"
               >
                 <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
-                  style={{ background: opt === q.question.correct ? 'rgba(74,222,128,0.3)' : 'rgba(255,255,255,0.1)', color: opt === q.question.correct ? '#4ade80' : 'rgba(255,255,255,0.6)' }}>
+                  style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)' }}>
                   {LABELS[i]}
                 </div>
                 <span className="font-semibold text-white">{opt}</span>
