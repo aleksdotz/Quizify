@@ -205,10 +205,10 @@ export default function HostGamePage({ params }: { params: Promise<{ code: strin
           {/* Header bar */}
           <div className="flex items-center gap-4 mb-5 card-inner px-5 py-3 rounded-xl">
             <span className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              Round <strong className="text-white">{q.round}</strong> / {q.totalRounds}
+              Round <strong style={{ color: '#fff', fontWeight: 700 }}>{q.round}</strong> / {q.totalRounds}
             </span>
             <span className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              Q <strong className="text-white">{q.questionInRound}</strong> / {q.questionsPerRound}
+              Question <strong style={{ color: '#fff', fontWeight: 700 }}>{q.questionInRound}</strong> / {q.questionsPerRound}
             </span>
             <span className="px-3 py-1 rounded-full text-xs font-semibold" style={{ background: 'rgba(224,64,251,0.2)', color: '#e040fb' }}>
               {q.question.category}

@@ -155,7 +155,8 @@ io.on('connection', (socket) => {
     io.to(`host-${code}`).emit('quiz:answer-received', { count, total, answeredPlayers });
 
     if (areAllAnswered(code)) {
-      triggerEndQuestion(code);
+      const room = getRoom(code);
+      if (room?.status === 'question') triggerEndQuestion(code);
     }
   });
 

@@ -51,10 +51,7 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Footer */}
-        <p className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
-          quiz.app · made for pub nights
-        </p>
+        
       </div>
     </div>
   );

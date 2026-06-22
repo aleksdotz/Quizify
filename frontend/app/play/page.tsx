@@ -120,17 +120,18 @@ export default function PlayPage() {
     };
   }, []);
 
-  const handleSubmit = () => {
-    if (!selectedAnswer || answerSubmitted || !playerData || !currentQuestion) return;
+  const handleSubmit = (answer: string) => {
+    if (!answer || answerSubmitted || !playerData || !currentQuestion) return;
     const taken = Math.floor((Date.now() - startTimeRef.current) / 1000);
     setTimeTaken(taken);
+    setSelectedAnswer(answer);
     setAnswerSubmitted(true);
-    setSubmittedAnswer(selectedAnswer);
+    setSubmittedAnswer(answer);
     setView('submitted');
 
     socket.emit('player:answer', {
       code: playerData.quizInfo.code,
-      answer: selectedAnswer,
+      answer,
     }, (res: { ok: boolean; timeTaken?: number }) => {
       if (res.timeTaken !== undefined) setTimeTaken(res.timeTaken);
     });
@@ -249,7 +250,8 @@ export default function PlayPage() {
               {q.question.options.map((opt, i) => (
                 <button
                   key={i}
-                  onClick={() => !answerSubmitted && setSelectedAnswer(opt)}
+                  onClick={() => handleSubmit(opt)}
+                  disabled={answerSubmitted}
                   className={`answer-option p-3 flex items-center gap-2 text-left ${selectedAnswer === opt ? 'selected' : ''}`}
                 >
                   <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
@@ -263,15 +265,6 @@ export default function PlayPage() {
                 </button>
               ))}
             </div>
-
-            {/* Submit */}
-            <button
-              onClick={handleSubmit}
-              disabled={!selectedAnswer || answerSubmitted}
-              className="btn-yellow w-full py-4 text-base"
-            >
-              Submit Answer
-            </button>
           </div>
         </div>
       </div>

@@ -132,7 +132,7 @@ export function submitAnswer(code: string, playerId: string, answer: string): { 
 
 export function endQuestion(code: string): { scores: PlayerScore[]; correctAnswer: string; allAnswers: { nickname: string; answer: string; correct: boolean }[] } | null {
   const room = rooms.get(code);
-  if (!room) return null;
+  if (!room || room.status !== 'question') return null;
 
   if (room.timer) {
     clearTimeout(room.timer);
