@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import ParticleBackground from '@/components/ParticleBackground';
 import QuizifyLogo from '@/components/QuizifyLogo';
-import StepIndicator from '@/components/StepIndicator';
 import CountdownTimer from '@/components/CountdownTimer';
 import { getSocket } from '@/lib/socket';
 import { QuestionPayload, PlayerScore, QuestionEndedPayload, RoundEndPayload, QuizInfo, PlayerInfo } from '@/lib/types';
@@ -144,7 +143,6 @@ export default function PlayPage() {
       <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 py-10">
         <ParticleBackground />
         <div className="relative z-10 w-full max-w-sm anim-slide-up">
-          <StepIndicator current={1} />
           <div className="card p-5 flex flex-col gap-4">
             <div className="flex justify-center">
               <QuizifyLogo size="md" />
@@ -216,7 +214,6 @@ export default function PlayPage() {
       <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 py-8">
         <ParticleBackground />
         <div className="relative z-10 w-full max-w-sm anim-slide-up">
-          <StepIndicator current={2} />
           <div className="card p-4 flex flex-col gap-4">
             {/* Tabs */}
             <div className="flex gap-1 p-1 rounded-xl" style={{ background: 'var(--card-inner)' }}>
@@ -277,7 +274,6 @@ export default function PlayPage() {
       <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 py-8">
         <ParticleBackground />
         <div className="relative z-10 w-full max-w-sm anim-slide-up">
-          <StepIndicator current={3} />
           <div className="card p-4 flex flex-col gap-4">
             {/* Submitted confirmation */}
             <div className="card-inner p-6 text-center anim-bounce-in">
@@ -346,7 +342,6 @@ export default function PlayPage() {
       <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 py-8">
         <ParticleBackground />
         <div className="relative z-10 w-full max-w-sm anim-scale-in">
-          <StepIndicator current={3} />
           <div className="card p-4 flex flex-col gap-4">
             {/* Correct/Wrong */}
             <div className={`card-inner p-5 text-center ${wasCorrect ? '' : ''}`} style={{ borderColor: wasCorrect ? 'rgba(74,222,128,0.3)' : 'rgba(248,113,113,0.3)', borderWidth: 1, borderStyle: 'solid' }}>
@@ -442,7 +437,6 @@ export default function PlayPage() {
       <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 py-8">
         <ParticleBackground />
         <div className="relative z-10 w-full max-w-sm anim-slide-up">
-          <StepIndicator current={4} />
           <div className="card p-5 flex flex-col gap-4">
             <div className="flex justify-center">
               <QuizifyLogo size="md" />
